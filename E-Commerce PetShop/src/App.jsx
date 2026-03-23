@@ -13,7 +13,7 @@ function App() {
   const cartCount = 5
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/E-Commerce-Pet-Shop">
       <div className="app">
         <NavBar
           cartCount={cartCount}
