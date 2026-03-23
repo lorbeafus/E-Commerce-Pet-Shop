@@ -21,7 +21,7 @@ const ItemDetailContainer = () => {
     return (
       <div className="detail-loading">
         <div className="detail-loading-spinner"></div>
-        <p>Loading product...</p>
+        <p>Cargando producto...</p>
       </div>
     )
   }
@@ -30,8 +30,8 @@ const ItemDetailContainer = () => {
     return (
       <div className="detail-not-found">
         <span className="detail-not-found-icon">🐾</span>
-        <h2>Product not found</h2>
-        <p>We couldn't find the product you're looking for.</p>
+        <h2>Producto no encontrado</h2>
+        <p>No pudimos encontrar el producto que estás buscando.</p>
       </div>
     )
   }

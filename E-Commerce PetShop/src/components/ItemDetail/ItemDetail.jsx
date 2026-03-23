@@ -24,7 +24,7 @@ const ItemDetail = ({ product }) => {
           <path d="m12 19-7-7 7-7"/>
           <path d="M19 12H5"/>
         </svg>
-        Back to Products
+        Volver a Productos
       </Link>
 
       <div className="detail-grid">
@@ -32,7 +32,7 @@ const ItemDetail = ({ product }) => {
         <div className="detail-image-section">
           <div className="detail-image-wrapper">
             {discount > 0 && (
-              <span className="detail-badge">{discount}% Off</span>
+              <span className="detail-badge">{discount}% Dto</span>
             )}
             <img src={image} alt={title} className="detail-image" />
           </div>
@@ -46,7 +46,7 @@ const ItemDetail = ({ product }) => {
           <div className="detail-rating">
             <div className="detail-stars">{renderStars(rating)}</div>
             <span className="detail-rating-number">{rating}</span>
-            <span className="detail-reviews">({reviews} reviews)</span>
+            <span className="detail-reviews">({reviews} reseñas)</span>
           </div>
 
           <div className="detail-pricing">
@@ -55,7 +55,7 @@ const ItemDetail = ({ product }) => {
               <span className="detail-original-price">${originalPrice.toFixed(2)}</span>
             )}
             {discount > 0 && (
-              <span className="detail-discount-tag">Save {discount}%</span>
+              <span className="detail-discount-tag">Ahorra {discount}%</span>
             )}
           </div>
 
@@ -63,14 +63,14 @@ const ItemDetail = ({ product }) => {
 
           {colors && colors.length > 0 && (
             <div className="detail-colors-section">
-              <span className="detail-colors-label">Available Colors</span>
+              <span className="detail-colors-label">Colores disponibles</span>
               <div className="detail-colors">
                 {colors.map((color, i) => (
                   <button
                     key={i}
                     className="detail-color-btn"
                     style={{ background: color }}
-                    aria-label={`Color option ${i + 1}`}
+                    aria-label={`Opción de color ${i + 1}`}
                   />
                 ))}
               </div>
@@ -78,7 +78,7 @@ const ItemDetail = ({ product }) => {
           )}
 
           <div className="detail-quantity">
-            <span className="detail-quantity-label">Quantity</span>
+            <span className="detail-quantity-label">Cantidad</span>
             <div className="detail-quantity-controls">
               <button className="detail-qty-btn">−</button>
               <span className="detail-qty-value">1</span>
@@ -93,7 +93,7 @@ const ItemDetail = ({ product }) => {
                 <path d="M3 6h18"/>
                 <path d="M16 10a4 4 0 0 1-8 0"/>
               </svg>
-              Add to Cart
+              Agregar al Carrito
             </button>
             <button className="detail-wishlist">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -105,15 +105,15 @@ const ItemDetail = ({ product }) => {
           <div className="detail-features">
             <div className="detail-feature">
               <span className="detail-feature-icon">🚚</span>
-              <span>Free shipping over $50</span>
+              <span>Envío gratis a partir de $50</span>
             </div>
             <div className="detail-feature">
               <span className="detail-feature-icon">↩️</span>
-              <span>30-day return policy</span>
+              <span>Política de devolución de 30 días</span>
             </div>
             <div className="detail-feature">
               <span className="detail-feature-icon">✅</span>
-              <span>100% quality guaranteed</span>
+              <span>100% calidad garantizada</span>
             </div>
           </div>
         </div>

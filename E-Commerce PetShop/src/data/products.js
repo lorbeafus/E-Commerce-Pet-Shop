@@ -1,7 +1,7 @@
 const products = [
   {
     id: 1,
-    title: "Premium Chew Ring",
+    title: "Anillo Masticable Premium",
     description: "Juguete resistente de goma natural para perros. Ideal para la salud dental y horas de diversión. Diseñado para masticar sin riesgo.",
     price: 12.99,
     originalPrice: 16.99,
@@ -14,7 +14,7 @@ const products = [
   },
   {
     id: 2,
-    title: "Natural Wood Bone",
+    title: "Hueso de Madera Natural",
     description: "Hueso de madera natural para masticar. Sin químicos, 100% seguro para tu mascota. Perfecto para cachorros y perros adultos.",
     price: 9.99,
     originalPrice: 14.99,
@@ -27,7 +27,7 @@ const products = [
   },
   {
     id: 3,
-    title: "Cotton Rope Toy",
+    title: "Juguete de Cuerda de Algodón",
     description: "Cuerda de algodón trenzado para jugar a tirar. Refuerza el vínculo con tu mascota mientras se divierte.",
     price: 8.49,
     originalPrice: 11.99,
@@ -40,7 +40,7 @@ const products = [
   },
   {
     id: 4,
-    title: "Premium Dog Food",
+    title: "Alimento Premium para Perros",
     description: "Alimento premium con ingredientes naturales seleccionados. Rico en proteínas y nutrientes esenciales para una dieta balanceada.",
     price: 34.99,
     originalPrice: 42.99,
@@ -53,7 +53,7 @@ const products = [
   },
   {
     id: 5,
-    title: "Leather Dog Collar",
+    title: "Collar de Cuero para Perros",
     description: "Collar de cuero genuino con hebilla dorada. Elegante, resistente y cómodo para el uso diario de tu mascota.",
     price: 24.99,
     originalPrice: 32.99,
@@ -66,7 +66,7 @@ const products = [
   },
   {
     id: 6,
-    title: "Pet Grooming Shampoo",
+    title: "Shampoo de Aseo para Mascotas",
     description: "Shampoo de aseo con ingredientes naturales. Limpia suavemente, deja el pelo suave y brillante con un aroma fresco.",
     price: 15.99,
     originalPrice: 19.99,
@@ -79,7 +79,7 @@ const products = [
   },
   {
     id: 7,
-    title: "Cozy Pet Bed",
+    title: "Cama Acogedora para Mascotas",
     description: "Cama redonda ultra suave de felpa. El lugar perfecto para que tu mascota descanse cómodamente durante todo el día.",
     price: 45.99,
     originalPrice: 59.99,
@@ -92,7 +92,7 @@ const products = [
   },
   {
     id: 8,
-    title: "Natural Dog Treats",
+    title: "Premios Naturales para Perros",
     description: "Galletas orgánicas horneadas con ingredientes 100% naturales. El snack saludable que tu perro merece.",
     price: 11.99,
     originalPrice: 15.99,
@@ -106,12 +106,12 @@ const products = [
 ];
 
 const categories = [
-  { id: "all", label: "All" },
-  { id: "food", label: "Food & Treats" },
-  { id: "toys", label: "Toys" },
-  { id: "grooming", label: "Grooming" },
-  { id: "collars", label: "Collars & Leashes" },
-  { id: "accessories", label: "Accessories" }
+  { id: "all", label: "Todos" },
+  { id: "food", label: "Alimentos y Premios" },
+  { id: "toys", label: "Juguetes" },
+  { id: "grooming", label: "Higiene" },
+  { id: "collars", label: "Collares y Correas" },
+  { id: "accessories", label: "Accesorios" }
 ];
 
 export const getProducts = (categoryId) => {

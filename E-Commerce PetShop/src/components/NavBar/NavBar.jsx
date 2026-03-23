@@ -13,19 +13,19 @@ const NavBar = ({ cartCount, title }) => {
 
         <nav className="navbar-links">
           <NavLink to="/" end className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
-            Home
+            Inicio
           </NavLink>
           <NavLink to="/category/food" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
-            Food & Treats
+            Alimentos
           </NavLink>
           <NavLink to="/category/toys" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
-            Toys
+            Juguetes
           </NavLink>
           <NavLink to="/category/grooming" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
-            Grooming
+            Higiene
           </NavLink>
           <NavLink to="/category/accessories" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
-            Accessories
+            Accesorios
           </NavLink>
         </nav>
 
@@ -35,7 +35,7 @@ const NavBar = ({ cartCount, title }) => {
               <circle cx="11" cy="11" r="8"/>
               <path d="m21 21-4.3-4.3"/>
             </svg>
-            <input type="text" placeholder="Search products..." className="navbar-search-input" />
+            <input type="text" placeholder="Buscar productos..." className="navbar-search-input" />
           </div>
           <CardWidget cartCount={cartCount} />
         </div>

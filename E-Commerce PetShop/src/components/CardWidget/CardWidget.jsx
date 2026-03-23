@@ -3,7 +3,7 @@ import "./CardWidget.css"
 
 const CardWidget = ({ cartCount }) => {
   return (
-    <Link to="/cart" className="card-widget" aria-label="Shopping cart">
+    <Link to="/cart" className="card-widget" aria-label="Carrito de compras">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="8" cy="21" r="1"/>
         <circle cx="19" cy="21" r="1"/>

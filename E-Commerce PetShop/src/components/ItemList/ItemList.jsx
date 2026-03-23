@@ -6,7 +6,7 @@ const ItemList = ({ products }) => {
     return (
       <div className="item-list-empty">
         <span className="item-list-empty-icon">🐾</span>
-        <p>No products found in this category</p>
+        <p>No se encontraron productos en esta categoría</p>
       </div>
     )
   }
