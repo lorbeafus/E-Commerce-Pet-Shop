@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/E-Commerce-Pet-Shop/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="PetShop - Todo lo que tu mascota necesita para una vida más feliz y saludable" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <title>PetShop - Tu Tienda de Mascotas</title>
+    <script type="text/javascript">
+      // Script to handle Single Page Application (SPA) routing on GitHub Pages
+      // Parse the query parameter redirect from 404.html
+      (function(l) {
+        if (l.search[1] === 'p' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) { 
+            return s.replace(/~and~/g, '&') 
+          }).filter(function(v) {
+            return v.slice(0, 1) === 'p'
+          })[0].split('=')[1];
+          if (decoded !== undefined) {
+            window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + (decoded || '') +
+              l.search.slice(1).split('&').filter(function(v) {
+                return v.slice(0, 1) !== 'p'
+              }).join('&').replace(/~and~/g, '&').replace(/^/, l.search.slice(1).indexOf('p') > 0 ? '&' : '?') +
+              l.hash
+            );
+          }
+        }
+      }(window.location))
+    </script>
+    <script type="module" crossorigin src="/E-Commerce-Pet-Shop/assets/index-BD5Ce9KQ.js"></script>
+    <link rel="stylesheet" crossorigin href="/E-Commerce-Pet-Shop/assets/index-x_E_YbW7.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
