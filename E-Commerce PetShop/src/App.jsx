@@ -8,15 +8,13 @@ import NavBar from "./components/NavBar/NavBar.jsx"
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import NotFound from "./components/NotFound/NotFound.jsx"
+import Cart from "./components/Cart/Cart.jsx"
 
 function App() {
-  const cartCount = 5
-
   return (
     <BrowserRouter basename="/E-Commerce-Pet-Shop">
       <div className="app">
         <NavBar
-          cartCount={cartCount}
           title="Pet Shop"
         />
         <main className="app-content">
@@ -24,6 +22,7 @@ function App() {
             <Route path="/" element={<ItemListContainer />} />
             <Route path="/category/:categoryId" element={<ItemListContainer />} />
             <Route path="/detail/:productId" element={<ItemDetailContainer />} />
+            <Route path="/cart" element={<Cart />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

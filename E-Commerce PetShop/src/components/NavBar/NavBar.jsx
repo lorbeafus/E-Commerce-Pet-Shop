@@ -1,8 +1,10 @@
 import { Link, NavLink } from "react-router-dom"
 import CardWidget from "../CardWidget/CardWidget.jsx"
+import { useCart } from "../context/CartContext.jsx"
 import "./NavBar.css"
 
-const NavBar = ({ cartCount, title }) => {
+const NavBar = ({ title }) => {
+  const { totalQuantity } = useCart()
   return (
     <header className="navbar">
       <div className="navbar-inner">
@@ -37,7 +39,7 @@ const NavBar = ({ cartCount, title }) => {
             </svg>
             <input type="text" placeholder="Buscar productos..." className="navbar-search-input" />
           </div>
-          <CardWidget cartCount={cartCount} />
+          <CardWidget cartCount={totalQuantity} />
         </div>
       </div>
     </header>
