@@ -60,7 +60,9 @@ src/
 
 ## 🤖 Despliegue Automático
 
-Este proyecto cuenta con un flujo de trabajo de **GitHub Actions**. Cada vez que se suben cambios a la rama `main`, el sitio se construye y se despliega automáticamente en GitHub Pages.
+Este proyecto utiliza el método nativo de **GitHub Actions** para el despliegue. Cada vez que se suben cambios a la rama `main`, un flujo de trabajo automático construye el proyecto y lo publica directamente en GitHub Pages, eliminando la necesidad de ramas adicionales como `gh-pages`.
+
+Para que esto funcione, asegúrate de que en la configuración de GitHub Pages de tu repositorio el **Source** esté configurado como **"GitHub Actions"**.
 
 ---
 
