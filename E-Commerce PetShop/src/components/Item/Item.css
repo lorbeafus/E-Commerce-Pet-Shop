@@ -125,31 +125,110 @@
   text-decoration: line-through;
 }
 
-/* Add to Cart button */
-.item-card-cart-btn {
-  position: absolute;
-  bottom: 20px;
-  right: 16px;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: var(--primary);
-  color: #fff;
+/* Actions & Counter */
+.item-card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 18px 20px;
+}
+
+.item-card-counter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg);
+  border-radius: var(--radius-md);
+  padding: 4px;
+  border: 1px solid var(--stroke);
+}
+
+.item-card-qty-btn {
+  width: 28px;
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0;
-  transform: translateY(8px);
+  background: #fff;
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: all 0.2s ease;
+  color: var(--text-dark);
+}
+
+.item-card-qty-btn:hover {
+  background: var(--bg-sage);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.item-card-qty-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  min-width: 30px;
+  text-align: center;
+}
+
+.item-card-add-btn {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   transition: all 0.3s ease;
+}
+
+.item-card-add-btn:hover {
+  background: var(--primary-light);
+  transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
 
-.item-card:hover .item-card-cart-btn {
-  opacity: 1;
+.item-card-add-btn:active {
   transform: translateY(0);
 }
 
-.item-card-cart-btn:hover {
-  background: var(--primary-light);
-  transform: scale(1.1);
+.item-card-add-btn svg {
+  stroke-width: 2.5px;
+}
+
+/* Toast Success Message */
+.item-card-toast {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 77, 67, 0.95);
+  color: white;
+  padding: 12px 20px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 600;
+  z-index: 10;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+  width: 85%;
+  text-align: center;
+  animation: toastFadeIn 0.3s ease-out;
+}
+
+@keyframes toastFadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -30%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
 }

@@ -117,16 +117,18 @@
   justify-content: center;
 }
 
-.hero-paw-bg {
-  font-size: 12rem;
-  opacity: 0.25;
-  filter: blur(1px);
+.hero-dog-image {
+  max-width: 90%;
+  max-height: 360px;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.15));
   animation: float 4s ease-in-out infinite;
+  z-index: 1;
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-15px) rotate(1deg); }
 }
 
 .hero-floating-badge {

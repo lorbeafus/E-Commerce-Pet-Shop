@@ -1,0 +1,228 @@
+.admin-container {
+  min-height: calc(100vh - 70px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background: var(--bg-sage);
+}
+
+.admin-card {
+  background: var(--bg-white);
+  width: 100%;
+  max-width: 600px;
+  border-radius: var(--radius-xl);
+  padding: 40px;
+  box-shadow: var(--shadow-lg);
+}
+
+.admin-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.admin-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.admin-header h1 {
+  font-size: 1.8rem;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.admin-header p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* Form Styles */
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--stroke);
+  font-family: var(--font);
+  font-size: 0.95rem;
+  background: var(--bg-white);
+  transition: all 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(243, 111, 33, 0.1);
+}
+
+.admin-section {
+  padding: 30px;
+  background: var(--bg);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--stroke);
+}
+
+.admin-section h2 {
+  font-size: 1.25rem;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--primary);
+}
+
+.admin-section p {
+  font-size: 0.9rem;
+  color: var(--text-body);
+  margin-bottom: 24px;
+}
+
+.admin-btn-secondary {
+  background: transparent;
+  color: var(--primary);
+  padding: 10px 20px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--primary);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-btn-secondary:hover {
+  background: rgba(0, 77, 67, 0.05);
+}
+
+.admin-btn-primary {
+  background: var(--accent);
+  color: white;
+  padding: 16px 32px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(243, 111, 33, 0.3);
+  margin-top: 10px;
+  border: none;
+}
+
+.admin-btn-primary:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(243, 111, 33, 0.4);
+}
+
+.admin-info {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  background: rgba(0, 77, 67, 0.05);
+  border-radius: var(--radius-md);
+  color: var(--primary);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  align-items: flex-start;
+}
+
+.admin-btn-primary:active {
+  transform: translateY(0);
+}
+
+/* File Upload & Preview */
+.file-upload-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.file-upload-wrapper input[type="file"] {
+  padding: 10px;
+  background: var(--bg-sage);
+  border: 2px dashed var(--stroke);
+  cursor: pointer;
+}
+
+.admin-image-preview {
+  margin-top: 10px;
+  width: 120px;
+  height: 120px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--stroke);
+}
+
+.admin-image-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Loading Spinner */
+.btn-loading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.spinner {
+  animation: rotate 2s linear infinite;
+  width: 20px;
+  height: 20px;
+}
+
+.spinner circle {
+  stroke: white;
+  stroke-linecap: round;
+  animation: dash 1.5s ease-in-out infinite;
+}
+
+@keyframes rotate {
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes dash {
+  0% { stroke-dasharray: 1, 150; stroke-dashoffset: 0; }
+  50% { stroke-dasharray: 90, 150; stroke-dashoffset: -35; }
+  100% { stroke-dasharray: 90, 150; stroke-dashoffset: -124; }
+}
+
+.admin-footer {
+  margin-top: 40px;
+  text-align: center;
+  border-top: 1px solid var(--stroke);
+  padding-top: 20px;
+}
+
+.admin-footer p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}

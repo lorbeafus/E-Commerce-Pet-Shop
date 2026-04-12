@@ -1,14 +1,25 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { useCart } from "../context/CartContext.jsx"
+import { useLanguage } from "../context/LanguageContext.jsx"
 import "./ItemDetail.css"
 
 const ItemDetail = ({ product }) => {
   const [quantity, setQuantity] = useState(1)
   const [added, setAdded] = useState(false)
   const { addToCart } = useCart()
+  const { t } = useLanguage()
 
   const { title, description, price, originalPrice, discount, rating, reviews, image, colors, category } = product
+
+  // Fix for local images if they start with / and aren't Cloudinary URLs
+  const getProductImage = (path) => {
+    if (!path) return ""
+    if (path.startsWith("http")) return path
+    const baseUrl = import.meta.env.BASE_URL
+    const cleanBase = baseUrl.endsWith("/") ? baseUrl.slice(0, -1) : baseUrl
+    return `${cleanBase}${path}`
+  }
 
   const handleIncrement = () => {
     setQuantity(prev => prev + 1)
@@ -45,7 +56,7 @@ const ItemDetail = ({ product }) => {
           <path d="m12 19-7-7 7-7"/>
           <path d="M19 12H5"/>
         </svg>
-        Volver a Productos
+        {t("detail_back")}
       </Link>
 
       <div className="detail-grid">
@@ -53,21 +64,23 @@ const ItemDetail = ({ product }) => {
         <div className="detail-image-section">
           <div className="detail-image-wrapper">
             {discount > 0 && (
-              <span className="detail-badge">{discount}% Dto</span>
+              <span className="detail-badge">{discount}% {t("detail_discount_badge")}</span>
             )}
-            <img src={image} alt={title} className="detail-image" />
+            <img src={getProductImage(image)} alt={displayTitle} className="detail-image" />
           </div>
         </div>
 
         {/* Info */}
-        <div className="detail-info">
-          <span className="detail-category">{category}</span>
-          <h1 className="detail-title">{title}</h1>
+        <div className="detail-info-column">
+          <div className="detail-header">
+            <div className="detail-category-badge">{category}</div>
+            <h1 className="detail-title">{displayTitle}</h1>
+          </div>
 
           <div className="detail-rating">
             <div className="detail-stars">{renderStars(rating)}</div>
             <span className="detail-rating-number">{rating}</span>
-            <span className="detail-reviews">({reviews} reseñas)</span>
+            <span className="detail-reviews">({reviews} {t("detail_reviews")})</span>
           </div>
 
           <div className="detail-pricing">
@@ -76,22 +89,22 @@ const ItemDetail = ({ product }) => {
               <span className="detail-original-price">${originalPrice.toFixed(2)}</span>
             )}
             {discount > 0 && (
-              <span className="detail-discount-tag">Ahorra {discount}%</span>
+              <span className="detail-discount-tag">{t("detail_save")} {discount}%</span>
             )}
           </div>
 
-          <p className="detail-description">{description}</p>
+          <p className="detail-description">{displayDescription}</p>
 
           {colors && colors.length > 0 && (
             <div className="detail-colors-section">
-              <span className="detail-colors-label">Colores disponibles</span>
+              <span className="detail-colors-label">{t("detail_colors_label")}</span>
               <div className="detail-colors">
                 {colors.map((color, i) => (
                   <button
                     key={i}
                     className="detail-color-btn"
                     style={{ background: color }}
-                    aria-label={`Opción de color ${i + 1}`}
+                    aria-label={`${t("detail_color_option")} ${i + 1}`}
                   />
                 ))}
               </div>
@@ -101,7 +114,7 @@ const ItemDetail = ({ product }) => {
           {!added ? (
             <>
               <div className="detail-quantity">
-                <span className="detail-quantity-label">Cantidad</span>
+                <span className="detail-quantity-label">{t("detail_quantity_label")}</span>
                 <div className="detail-quantity-controls">
                   <button className="detail-qty-btn" onClick={handleDecrement}>−</button>
                   <span className="detail-qty-value">{quantity}</span>
@@ -116,7 +129,7 @@ const ItemDetail = ({ product }) => {
                     <path d="M3 6h18"/>
                     <path d="M16 10a4 4 0 0 1-8 0"/>
                   </svg>
-                  Agregar al Carrito
+                  {t("detail_add_to_cart")}
                 </button>
                 <button className="detail-wishlist">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -128,10 +141,10 @@ const ItemDetail = ({ product }) => {
           ) : (
             <div className="detail-actions">
               <Link to="/cart" className="detail-finish-btn">
-                Ir al Carrito
+                {t("detail_go_to_cart")}
               </Link>
               <Link to="/" className="detail-continue-btn">
-                Seguir Comprando
+                {t("detail_continue")}
               </Link>
             </div>
           )}
@@ -139,15 +152,15 @@ const ItemDetail = ({ product }) => {
           <div className="detail-features">
             <div className="detail-feature">
               <span className="detail-feature-icon">🚚</span>
-              <span>Envío gratis a partir de $50</span>
+              <span>{t("detail_shipping")}</span>
             </div>
             <div className="detail-feature">
               <span className="detail-feature-icon">↩️</span>
-              <span>Política de devolución de 30 días</span>
+              <span>{t("detail_returns")}</span>
             </div>
             <div className="detail-feature">
               <span className="detail-feature-icon">✅</span>
-              <span>100% calidad garantizada</span>
+              <span>{t("detail_quality")}</span>
             </div>
           </div>
         </div>

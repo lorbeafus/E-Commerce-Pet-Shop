@@ -1,14 +1,29 @@
 import { useState, useEffect } from "react"
 import { useParams, Link } from "react-router-dom"
-import { getProducts, categories } from "../../data/products.js"
+import { getProducts } from "../../data/products.js"
 import ItemList from "../ItemList/itemList.jsx"
+import { useLanguage } from "../context/LanguageContext.jsx"
+import heroDog from "../../assets/img/perro.png"
 import "./ItemListContainer.css"
+
+// Map category IDs to their translation keys
+const CATEGORY_KEYS = {
+  all: "cat_all",
+  food: "cat_food",
+  toys: "cat_toys",
+  grooming: "cat_grooming",
+  collars: "cat_collars",
+  accessories: "cat_accessories",
+}
+
+const CATEGORY_IDS = ["all", "food", "toys", "grooming", "collars", "accessories"]
 
 const ItemListContainer = () => {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
   const [activeCategory, setActiveCategory] = useState("all")
   const { categoryId } = useParams()
+  const { t } = useLanguage()
 
   useEffect(() => {
     setLoading(true)
@@ -28,15 +43,15 @@ const ItemListContainer = () => {
         <section className="hero">
           <div className="hero-inner">
             <div className="hero-content">
-              <span className="hero-badge">🐾 #1 Tienda de Mascotas</span>
+              <span className="hero-badge">{t("hero_badge")}</span>
               <h1 className="hero-title">
-                Todo lo que tu Mascota Necesita para una Vida más Feliz y Saludable
+                {t("hero_title")}
               </h1>
               <p className="hero-text">
-                Creemos que las mascotas merecen más que solo cuidados — merecen amor, comodidad y diversión todos los días.
+                {t("hero_text")}
               </p>
               <Link to="/category/all" className="hero-cta">
-                Comprar Colección Premium
+                {t("hero_cta")}
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M5 12h14"/>
                   <path d="m12 5 7 7-7 7"/>
@@ -49,18 +64,18 @@ const ItemListContainer = () => {
                   <span className="hero-avatar" style={{background: '#4D96FF'}}>🥰</span>
                 </div>
                 <span className="hero-rating-text">
-                  <strong>Calificación 4.9/5</strong> Elegida por más de 245K dueños de mascotas
+                  <strong>{t("hero_rating")}</strong> {t("hero_rating_sub")}
                 </span>
               </div>
             </div>
             <div className="hero-visual">
               <div className="hero-image-container">
-                <div className="hero-paw-bg">🐕</div>
+                <img src={heroDog} alt="Happy Dog" className="hero-dog-image" />
                 <div className="hero-floating-badge hero-floating-badge-top">
-                  ✨ Ajuste y Comodidad Perfectos
+                  {t("hero_badge_top")}
                 </div>
                 <div className="hero-floating-badge hero-floating-badge-bottom">
-                  🎾 Juguetes en Tendencia
+                  {t("hero_badge_bottom")}
                 </div>
               </div>
             </div>
@@ -76,10 +91,10 @@ const ItemListContainer = () => {
               <path d="m12 19-7-7 7-7"/>
               <path d="M19 12H5"/>
             </svg>
-            Volver al Inicio
+            {t("back_home")}
           </Link>
           <h1 className="category-title">
-            {categories.find(c => c.id === categoryId)?.label || "Todos los Productos"}
+            {t(CATEGORY_KEYS[categoryId]) || t("all_products")}
           </h1>
         </div>
       )}
@@ -88,22 +103,22 @@ const ItemListContainer = () => {
       <section className="bestsellers">
         {!categoryId && (
           <>
-            <h2 className="section-title">Nuestros Más Vendidos</h2>
+            <h2 className="section-title">{t("bestsellers_title")}</h2>
             <p className="section-subtitle">
-              Descubre lo que nuestros clientes dicen sobre su experiencia con nuestros productos
+              {t("bestsellers_subtitle")}
             </p>
           </>
         )}
 
         {/* Category Filter Pills */}
         <div className="category-filters">
-          {categories.map((cat) => (
+          {CATEGORY_IDS.map((id) => (
             <Link
-              key={cat.id}
-              to={cat.id === "all" ? "/" : `/category/${cat.id}`}
-              className={`filter-pill ${activeCategory === cat.id ? "filter-pill-active" : ""}`}
+              key={id}
+              to={id === "all" ? "/" : `/category/${id}`}
+              className={`filter-pill ${activeCategory === id ? "filter-pill-active" : ""}`}
             >
-              {cat.label}
+              {t(CATEGORY_KEYS[id])}
             </Link>
           ))}
         </div>
@@ -112,7 +127,7 @@ const ItemListContainer = () => {
         {loading ? (
           <div className="loading">
             <div className="loading-spinner"></div>
-            <p>Cargando productos...</p>
+            <p>{t("loading")}</p>
           </div>
         ) : (
           <ItemList products={products} />
