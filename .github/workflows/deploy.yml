@@ -12,6 +12,10 @@ permissions:
   pages: write
   id-token: write
 
+# Forzar el uso de Node 24 para evitar advertencias de deprecación
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 # Cancela despliegues en curso si se inicia uno nuevo
 concurrency:
   group: "pages"
@@ -25,16 +29,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Pages ⚙️
         uses: actions/configure-pages@v5
+
+      - name: Setup Node.js ⬢
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: './E-Commerce PetShop/package-lock.json'
 
       - name: Install and Build 🔧
         run: |
           cd "E-Commerce PetShop"
           npm install
           npm run build
+
+      - name: Verify Build Output 🔍
+        run: ls -R "./E-Commerce PetShop/dist"
 
       - name: Upload artifact 📦
         uses: actions/upload-pages-artifact@v3
