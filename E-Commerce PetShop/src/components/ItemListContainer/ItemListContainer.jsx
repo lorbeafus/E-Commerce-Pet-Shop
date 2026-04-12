@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useParams, Link } from "react-router-dom"
-import { getProducts } from "../../data/products.js"
+import { getProducts } from "../../firebase/productService.js"
 import ItemList from "../ItemList/itemList.jsx"
 import { useLanguage } from "../context/LanguageContext.jsx"
 import heroDog from "../../assets/img/perro.png"

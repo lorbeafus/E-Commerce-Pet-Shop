@@ -1,9 +1,8 @@
 import { useState } from "react"
-import { seedDatabase } from "../../firebase/seed"
 import { useLanguage } from "../context/LanguageContext"
 import { db } from "../../firebase/config"
 import { collection, addDoc } from "firebase/firestore"
-import { categories } from "../../data/products"
+import { categories } from "../../firebase/productService"
 import "./Admin.css"
 
 const Admin = () => {
@@ -238,15 +237,6 @@ const Admin = () => {
               ) : "✨ Guardar Producto"}
             </button>
           </form>
-        </div>
-
-        {/* Section: Seeding */}
-        <div className="admin-section" style={{ marginTop: '24px', opacity: 0.8 }}>
-          <h2 style={{ fontSize: '1rem' }}>Herramientas de Desarrollador</h2>
-          <p style={{ fontSize: '0.8rem' }}>Carga los productos iniciales desde el archivo local (usar solo una vez).</p>
-          <button className="admin-btn-secondary" onClick={seedDatabase}>
-            🚀 Cargar Lote Inicial
-          </button>
         </div>
 
         <div className="admin-footer">
