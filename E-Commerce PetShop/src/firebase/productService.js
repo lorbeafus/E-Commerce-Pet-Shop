@@ -1,5 +1,5 @@
 import { db } from "./config"
-import { collection, getDocs, query, where, doc, getDoc } from "firebase/firestore"
+import { collection, getDocs, query, where, doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore"
 
 export const categories = [
   { id: "all", label: "cat_all" },
@@ -48,5 +48,27 @@ export const getProductById = async (id) => {
   } catch (error) {
     console.error("Error fetching product by id:", error)
     return null
+  }
+}
+
+export const updateProduct = async (id, data) => {
+  try {
+    const docRef = doc(db, "products", id)
+    await updateDoc(docRef, data)
+    return true
+  } catch (error) {
+    console.error("Error updating product:", error)
+    throw error
+  }
+}
+
+export const deleteProduct = async (id) => {
+  try {
+    const docRef = doc(db, "products", id)
+    await deleteDoc(docRef)
+    return true
+  } catch (error) {
+    console.error("Error deleting product:", error)
+    throw error
   }
 }
