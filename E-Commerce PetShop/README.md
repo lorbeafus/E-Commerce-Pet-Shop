@@ -66,4 +66,4 @@ Para que esto funcione, asegúrate de que en la configuración de GitHub Pages d
 
 ---
 
-_Desarrollado por [Lorena Fusillo - Nilo Tech](https://github.com/lorbeafus)_
+_Desarrollado por [Lorena Fusillo](https://github.com/lorbeafus)_

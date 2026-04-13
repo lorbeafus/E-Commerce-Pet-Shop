@@ -82,6 +82,9 @@ const translations = {
     checkout_order_id: "Tu número de orden es",
     checkout_error_email: "Los emails no coinciden",
     checkout_error_fields: "Por favor, completa todos los campos",
+    checkout_error_name: "El nombre solo debe contener letras",
+    checkout_error_phone: "El teléfono no es válido (solo números y símbolos básicos)",
+    checkout_error_email_format: "El formato de email no es válido",
 
     // NotFound
     not_found_subtitle: "Página no encontrada",
@@ -178,6 +181,9 @@ const translations = {
     checkout_order_id: "O seu número de pedido é",
     checkout_error_email: "Os emails não coincidem",
     checkout_error_fields: "Por favor, preencha todos os campos",
+    checkout_error_name: "O nome deve conter apenas letras",
+    checkout_error_phone: "O telefone não é válido (apenas números e símbolos básicos)",
+    checkout_error_email_format: "O formato de e-mail não é válido",
 
     // NotFound
     not_found_subtitle: "Página não encontrada",

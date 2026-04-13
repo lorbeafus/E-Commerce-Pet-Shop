@@ -40,13 +40,33 @@ const Cart = () => {
         e.preventDefault()
         setError("")
 
-        if (buyer.email !== buyer.emailConfirm) {
-            setError(t("checkout_error_email"))
-            return
-        }
+        // Regex patterns
+        const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/
+        const phoneRegex = /^[0-9\s\-+()]+$/
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
         if (!buyer.name || !buyer.phone || !buyer.email) {
             setError(t("checkout_error_fields"))
+            return
+        }
+
+        if (!nameRegex.test(buyer.name)) {
+            setError(t("checkout_error_name"))
+            return
+        }
+
+        if (!phoneRegex.test(buyer.phone)) {
+            setError(t("checkout_error_phone"))
+            return
+        }
+
+        if (!emailRegex.test(buyer.email)) {
+            setError(t("checkout_error_email_format"))
+            return
+        }
+
+        if (buyer.email !== buyer.emailConfirm) {
+            setError(t("checkout_error_email"))
             return
         }
 
