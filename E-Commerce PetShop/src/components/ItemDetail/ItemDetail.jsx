@@ -8,9 +8,11 @@ const ItemDetail = ({ product }) => {
   const [quantity, setQuantity] = useState(1)
   const [added, setAdded] = useState(false)
   const { addToCart } = useCart()
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
 
-  const { title, description, price, originalPrice, discount, rating, reviews, image, colors, category } = product
+  const { price, originalPrice, discount, rating, reviews, image, colors, category } = product
+  const displayTitle = product[`title_${language}`] || product.title_es || product.title
+  const displayDescription = product[`description_${language}`] || product.description_es || product.description
 
   // Fix for local images if they start with / and aren't Cloudinary URLs
   const getProductImage = (path) => {
