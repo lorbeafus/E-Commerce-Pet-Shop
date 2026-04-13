@@ -8,7 +8,15 @@ import "./Admin.css"
 
 const Admin = () => {
   const { t } = useLanguage()
-  const { logout } = useAuth()
+  const { user, login, logout, loading: authLoading } = useAuth()
+  
+  // Login States
+  const [loginEmail, setLoginEmail] = useState("")
+  const [loginPassword, setLoginPassword] = useState("")
+  const [loginError, setLoginError] = useState("")
+  const [loginLoading, setLoginLoading] = useState(false)
+
+  // Admin States
   const [loading, setLoading] = useState(false)
   const [products, setProducts] = useState([])
   const [isEditing, setIsEditing] = useState(false)
@@ -26,18 +34,45 @@ const Admin = () => {
     originalPrice: "",
     category: "food",
     discount: 0,
-    rating: 5,
     reviews: 0,
     stock: 0
   })
 
   useEffect(() => {
-    fetchProducts()
-  }, [])
+    if (user) {
+      fetchProducts()
+    }
+  }, [user])
 
   const fetchProducts = async () => {
     const data = await getProducts("all")
     setProducts(data)
+  }
+
+  const handleLogin = async (e) => {
+    e.preventDefault()
+    setLoginError("")
+    setLoginLoading(true)
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(loginEmail)) {
+      setLoginError("Por favor, ingresa un formato de email válido.")
+      setLoginLoading(false)
+      return
+    }
+
+    try {
+      await login(loginEmail, loginPassword)
+    } catch (err) {
+      console.error(err)
+      if (err.code === "auth/invalid-credential" || err.code === "auth/user-not-found" || err.code === "auth/wrong-password") {
+        setLoginError("Credenciales incorrectas. Verifica tu email y contraseña.")
+      } else {
+        setLoginError("Ocurrió un error al intentar iniciar sesión.")
+      }
+    } finally {
+      setLoginLoading(false)
+    }
   }
 
   const handleChange = (e) => {
@@ -98,6 +133,23 @@ const Admin = () => {
     setLoading(true)
 
     try {
+      // Validaciones detalladas
+      if (!formData.title_es.trim() || !formData.title_pt.trim()) {
+        throw new Error("Los títulos no pueden estar vacíos o contener solo espacios.")
+      }
+
+      if (Number(formData.price) <= 0) {
+        throw new Error("El precio debe ser un número mayor a 0.")
+      }
+
+      if (Number(formData.discount) < 0 || Number(formData.discount) > 100) {
+        throw new Error("El descuento debe estar entre 0 y 100.")
+      }
+
+      if (Number(formData.stock) < 0 || !Number.isInteger(Number(formData.stock))) {
+        throw new Error("El stock debe ser un número entero mayor o igual a 0.")
+      }
+
       let imageUrl = formData.image || ""
 
       // 1. Upload new image if provided
@@ -174,7 +226,6 @@ const Admin = () => {
       originalPrice: "",
       category: "food",
       discount: 0,
-      rating: 5,
       reviews: 0,
       stock: 0
     })
@@ -192,6 +243,59 @@ const Admin = () => {
     return `${cleanBase}${path}`
   }
 
+  // Render Login if no user
+  if (!user) {
+    return (
+      <div className="admin-container login-view">
+        <div className="admin-overlay"></div>
+        <div className="admin-card login-card">
+          <div className="admin-header login-header">
+            <div className="admin-icon login-logo">🐾</div>
+            <h1>Acceso Administrativo</h1>
+            <p>Ingresa tus credenciales para gestionar la tienda</p>
+          </div>
+
+          <form className="admin-form login-form" onSubmit={handleLogin}>
+            {loginError && <div className="admin-error login-error">{loginError}</div>}
+            
+            <div className="form-group login-group">
+              <label htmlFor="loginEmail">Email</label>
+              <div className="input-wrapper">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <input 
+                  type="email" id="loginEmail" required 
+                  value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)}
+                  placeholder="admin@petshop.com"
+                />
+              </div>
+            </div>
+
+            <div className="form-group login-group">
+              <label htmlFor="loginPassword">Contraseña</label>
+              <div className="input-wrapper">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <input 
+                  type="password" id="loginPassword" required 
+                  value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)}
+                  placeholder="••••••••"
+                />
+              </div>
+            </div>
+
+            <button type="submit" className="admin-btn-primary login-btn" disabled={loginLoading}>
+              {loginLoading ? "Iniciando sesión..." : "Entrar al Panel"}
+            </button>
+          </form>
+
+          <div className="admin-footer login-footer">
+            <p>© 2026 PetShop Admin - Sistema Seguro</p>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // Render Dashboard if logged in
   return (
     <div className="admin-container">
       <div className="admin-card">

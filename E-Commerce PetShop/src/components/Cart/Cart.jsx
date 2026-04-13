@@ -50,7 +50,7 @@ const Cart = () => {
             return
         }
 
-        if (!nameRegex.test(buyer.name)) {
+        if (!buyer.name.trim() || !nameRegex.test(buyer.name)) {
             setError(t("checkout_error_name"))
             return
         }
