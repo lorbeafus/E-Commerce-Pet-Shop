@@ -6,6 +6,7 @@ import ItemListContainer from "./components/ItemListContainer/ItemListContainer.
 import NavBar from "./components/NavBar/NavBar.jsx"
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { CartProvider } from "./components/context/CartContext.jsx"
 
 import NotFound from "./components/NotFound/NotFound.jsx"
 import Cart from "./components/Cart/Cart.jsx"
@@ -20,6 +21,7 @@ function App() {
     <AuthProvider>
       <LanguageProvider>
         <BrowserRouter basename="/E-Commerce-Pet-Shop">
+          <CartProvider>
           <div className="app">
             <NavBar
               title="Pet Shop"
@@ -43,6 +45,7 @@ function App() {
               </Routes>
             </main>
           </div>
+          </CartProvider>
         </BrowserRouter>
       </LanguageProvider>
     </AuthProvider>

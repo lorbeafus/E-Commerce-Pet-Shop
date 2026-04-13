@@ -5,7 +5,7 @@ import { useCart } from "../context/CartContext.jsx"
 import "./Item.css"
 
 const Item = ({ product }) => {
-  const { id, price, originalPrice, discount, rating, reviews, image, colors } = product
+  const { id, price, originalPrice, discount, rating, reviews, image, colors, stock } = product
   const { t, language } = useLanguage()
   const { addToCart } = useCart()
   
@@ -32,7 +32,9 @@ const Item = ({ product }) => {
   const handleIncrement = (e) => {
     e.preventDefault()
     e.stopPropagation()
-    setQuantity(prev => prev + 1)
+    if (quantity < stock) {
+      setQuantity(prev => prev + 1)
+    }
   }
 
   const handleDecrement = (e) => {
@@ -44,9 +46,11 @@ const Item = ({ product }) => {
   const handleAddToCart = (e) => {
     e.preventDefault()
     e.stopPropagation()
-    addToCart(product, quantity)
-    setShowToast(true)
-    setQuantity(1) // Reset quantity after adding
+    if (stock > 0) {
+      addToCart(product, quantity)
+      setShowToast(true)
+      setQuantity(1)
+    }
   }
 
   const renderStars = (rating) => {
@@ -70,10 +74,13 @@ const Item = ({ product }) => {
         </div>
       )}
 
-      <Link to={`/detail/${id}`} className="item-card-link">
+      <Link to={`/detail/${id}`} className="item-card-link-wrapper">
         <div className="item-card-image-wrapper">
           {discount > 0 && (
             <span className="item-card-badge">{discount}% {t("item_discount")}</span>
+          )}
+          {stock <= 0 && (
+            <span className="item-card-badge stock-badge-out">{t("out_of_stock")}</span>
           )}
           <img
             src={getProductImage(image)}
@@ -101,13 +108,20 @@ const Item = ({ product }) => {
       </Link>
 
       <div className="item-card-actions">
-        <div className="item-card-counter" onClick={(e) => e.stopPropagation()}>
-          <button className="item-card-qty-btn" onClick={handleDecrement}>−</button>
-          <span className="item-card-qty-value">{quantity}</span>
-          <button className="item-card-qty-btn" onClick={handleIncrement}>+</button>
+        <div className="item-card-counter" onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+        }}>
+          <button className="item-card-qty-btn" onClick={handleDecrement} disabled={stock <= 0}>−</button>
+          <span className="item-card-qty-value">{stock > 0 ? quantity : 0}</span>
+          <button className="item-card-qty-btn" onClick={handleIncrement} disabled={stock <= 0 || quantity >= stock}>+</button>
         </div>
         
-        <button className="item-card-add-btn" onClick={handleAddToCart}>
+        <button 
+          className="item-card-add-btn" 
+          onClick={handleAddToCart}
+          disabled={stock <= 0}
+        >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
             <path d="M3 6h18"/>

@@ -46,6 +46,11 @@ const translations = {
     detail_returns: "Política de devolución de 30 días",
     detail_quality: "100% calidad garantizada",
     detail_discount_badge: "Dto",
+    detail_loading: "Cargando producto...",
+    detail_not_found_title: "Producto no encontrado",
+    detail_not_found_text: "No pudimos encontrar el producto que estás buscando.",
+    out_of_stock: "Sin Stock",
+    stock_available: "Stock disponible",
 
     // Cart
     cart_empty_title: "Tu carrito está vacío",
@@ -65,6 +70,18 @@ const translations = {
     cart_clear: "Vaciar Carrito",
     cart_continue: "Continuar comprando",
     cart_added_success: "¡Agregado exitosamente! 🐾",
+
+    // Checkout
+    checkout_form_title: "Datos de contacto",
+    checkout_name: "Nombre completo",
+    checkout_phone: "Teléfono",
+    checkout_email: "Email",
+    checkout_email_confirm: "Confirmar Email",
+    checkout_submit: "Generar Orden",
+    checkout_success_title: "¡Gracias por tu compra!",
+    checkout_order_id: "Tu número de orden es",
+    checkout_error_email: "Los emails no coinciden",
+    checkout_error_fields: "Por favor, completa todos los campos",
 
     // NotFound
     not_found_subtitle: "Página no encontrada",
@@ -125,6 +142,11 @@ const translations = {
     detail_returns: "Política de devolução de 30 dias",
     detail_quality: "100% qualidade garantida",
     detail_discount_badge: "Desc",
+    detail_loading: "Carregando produto...",
+    detail_not_found_title: "Produto não encontrado",
+    detail_not_found_text: "Não conseguimos encontrar o produto que você está procurando.",
+    out_of_stock: "Esgotado",
+    stock_available: "Stock disponível",
 
     // Cart
     cart_empty_title: "Seu carrinho está vazio",
@@ -144,6 +166,18 @@ const translations = {
     cart_clear: "Esvaziar Carrinho",
     cart_continue: "Continuar comprando",
     cart_added_success: "Adicionado com sucesso! 🐾",
+
+    // Checkout
+    checkout_form_title: "Dados de contato",
+    checkout_name: "Nome completo",
+    checkout_phone: "Telefone",
+    checkout_email: "Email",
+    checkout_email_confirm: "Confirmar Email",
+    checkout_submit: "Gerar Pedido",
+    checkout_success_title: "Obrigado pela sua compra!",
+    checkout_order_id: "O seu número de pedido é",
+    checkout_error_email: "Os emails não coincidem",
+    checkout_error_fields: "Por favor, preencha todos os campos",
 
     // NotFound
     not_found_subtitle: "Página não encontrada",

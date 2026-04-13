@@ -10,7 +10,7 @@ const ItemDetail = ({ product }) => {
   const { addToCart } = useCart()
   const { t, language } = useLanguage()
 
-  const { price, originalPrice, discount, rating, reviews, image, colors, category } = product
+  const { price, originalPrice, discount, rating, reviews, image, colors, category, stock } = product
   const displayTitle = product[`title_${language}`] || product.title_es || product.title
   const displayDescription = product[`description_${language}`] || product.description_es || product.description
 
@@ -24,7 +24,9 @@ const ItemDetail = ({ product }) => {
   }
 
   const handleIncrement = () => {
-    setQuantity(prev => prev + 1)
+    if (quantity < stock) {
+      setQuantity(prev => prev + 1)
+    }
   }
 
   const handleDecrement = () => {
@@ -34,8 +36,10 @@ const ItemDetail = ({ product }) => {
   }
 
   const onAdd = () => {
-    addToCart(product, quantity)
-    setAdded(true)
+    if (stock > 0) {
+      addToCart(product, quantity)
+      setAdded(true)
+    }
   }
 
   const renderStars = (rating) => {
@@ -97,6 +101,14 @@ const ItemDetail = ({ product }) => {
 
           <p className="detail-description">{displayDescription}</p>
 
+          <div className="detail-stock-status">
+            {stock > 0 ? (
+              <span className="stock-in"><span className="dot"></span> {t("stock_available")}: {stock}</span>
+            ) : (
+              <span className="stock-out"><span className="dot"></span> {t("out_of_stock")}</span>
+            )}
+          </div>
+
           {colors && colors.length > 0 && (
             <div className="detail-colors-section">
               <span className="detail-colors-label">{t("detail_colors_label")}</span>
@@ -118,14 +130,18 @@ const ItemDetail = ({ product }) => {
               <div className="detail-quantity">
                 <span className="detail-quantity-label">{t("detail_quantity_label")}</span>
                 <div className="detail-quantity-controls">
-                  <button className="detail-qty-btn" onClick={handleDecrement}>−</button>
-                  <span className="detail-qty-value">{quantity}</span>
-                  <button className="detail-qty-btn" onClick={handleIncrement}>+</button>
+                  <button className="detail-qty-btn" onClick={handleDecrement} disabled={stock <= 0}>−</button>
+                  <span className="detail-qty-value">{stock > 0 ? quantity : 0}</span>
+                  <button className="detail-qty-btn" onClick={handleIncrement} disabled={stock <= 0 || quantity >= stock}>+</button>
                 </div>
               </div>
 
               <div className="detail-actions">
-                <button className="detail-add-to-cart" onClick={onAdd}>
+                <button 
+                  className="detail-add-to-cart" 
+                  onClick={onAdd}
+                  disabled={stock <= 0}
+                >
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
                     <path d="M3 6h18"/>

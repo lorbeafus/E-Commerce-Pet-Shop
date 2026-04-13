@@ -27,7 +27,8 @@ const Admin = () => {
     category: "food",
     discount: 0,
     rating: 5,
-    reviews: 0
+    reviews: 0,
+    stock: 0
   })
 
   useEffect(() => {
@@ -43,7 +44,7 @@ const Admin = () => {
     const { name, value } = e.target
     setFormData(prev => ({
       ...prev,
-      [name]: name === "price" || name === "originalPrice" || name === "discount" 
+      [name]: name === "price" || name === "originalPrice" || name === "discount" || name === "stock"
         ? parseFloat(value) || 0 
         : value
     }))
@@ -111,7 +112,8 @@ const Admin = () => {
         image: imageUrl,
         price: Number(formData.price),
         originalPrice: Number(formData.originalPrice),
-        discount: Number(formData.discount)
+        discount: Number(formData.discount),
+        stock: Number(formData.stock)
       }
 
       if (isEditing) {
@@ -173,7 +175,8 @@ const Admin = () => {
       category: "food",
       discount: 0,
       rating: 5,
-      reviews: 0
+      reviews: 0,
+      stock: 0
     })
     setIsEditing(false)
     setEditingId(null)
@@ -254,6 +257,10 @@ const Admin = () => {
                 <label>Desc. (%)</label>
                 <input type="number" name="discount" value={formData.discount} onChange={handleChange} />
               </div>
+              <div className="form-group">
+                <label>Stock Disponible</label>
+                <input type="number" name="stock" required value={formData.stock} onChange={handleChange} />
+              </div>
             </div>
 
             <div className="form-group">
@@ -301,6 +308,7 @@ const Admin = () => {
                   <h3>{product.title_es || product.title}</h3>
                   <p className="admin-prod-price">${product.price.toFixed(2)}</p>
                   <p className="admin-prod-cat">{product.category}</p>
+                  <p className="admin-prod-stock">Stock: {product.stock ?? 0}</p>
                 </div>
                 <div className="admin-prod-actions">
                   <button className="btn-edit" onClick={() => handleEdit(product)} title="Editar">

@@ -23,8 +23,8 @@ export const getProducts = async (categoryId) => {
 
     const querySnapshot = await getDocs(q)
     const products = querySnapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data()
+      ...doc.data(),
+      id: doc.id
     }))
 
     return products
@@ -40,7 +40,7 @@ export const getProductById = async (id) => {
     const docSnap = await getDoc(docRef)
 
     if (docSnap.exists()) {
-      return { id: docSnap.id, ...docSnap.data() }
+      return { ...docSnap.data(), id: docSnap.id }
     } else {
       console.log("No such product!")
       return null
